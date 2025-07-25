@@ -1,9 +1,9 @@
-import jwt from 'jsonwebtoken';
-import { readData } from '../utils/fileDB.js';
+const jwt = require('jsonwebtoken')
+const { readData } =require('../utils/fileDB.js')
 
 const SECRET = process.env.SECRET_TOKEN;
 
-export default async function auth(req, res, next) {
+module.exports = async function auth(req, res, next) {
   const token = req.headers.authorization?.split(' ')[1];
   if (!token) return res.status(401).json({ error: 'Missing token' });
 

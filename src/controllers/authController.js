@@ -1,10 +1,10 @@
-import jwt from 'jsonwebtoken';
-import { readData, writeData } from '../utils/fileDB.js';
+const jwt = require('jsonwebtoken');
+const { readData, writeData } = require('../utils/fileDB.js')
 
 
 const SECRET_TOKEN = process.env.SECRET_TOKEN
 
-export async function register(req, res) {
+async function register(req, res) {
   const { username, password } = req.body;
   const users = await readData('users.json');
   if (users.find(u => u.username === username)) {
@@ -24,7 +24,7 @@ export async function register(req, res) {
   res.status(201).json({ message: 'User registered' });
 }
 
-export async function login(req, res) {
+async function login(req, res) {
   const { username, password } = req.body;
   const users = await readData('users.json');
   const user = users.find(u => u.username === username && u.password === password);
@@ -37,3 +37,8 @@ export async function login(req, res) {
   const token = jwt.sign({ id: user.id }, SECRET_TOKEN, { expiresIn: '1h' });
   res.json({ token });
 }
+
+module.exports = {
+  register,
+  login
+};

@@ -1,10 +1,9 @@
-import express from 'express';
-import 'dotenv/config';
-import swaggerUi from 'swagger-ui-express';
-import YAML from 'yamljs';
-import coffeeRoutes from './routes/coffeeRoutes.js';
-import authRoutes from './routes/authRoutes.js';
-
+const express = require('express');
+require('dotenv/config');
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
+const coffeeRoutes = require('./routes/coffeeRoutes.js');
+const authRoutes = require('./routes/authRoutes.js');
 
 const app = express();
 
@@ -18,7 +17,7 @@ app.get('/', (req, res) => {
 
 
 app.use('/auth', authRoutes);
-app.use('/api', coffeeRoutes);
+app.use(coffeeRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err);

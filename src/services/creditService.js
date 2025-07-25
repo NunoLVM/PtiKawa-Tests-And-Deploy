@@ -1,6 +1,6 @@
-import { readData, writeData } from '../utils/fileDB.js';
+const { readData, writeData } = require('../utils/fileDB.js');
 
-export async function recharge(userId, amount) {
+async function recharge(userId, amount) {
   const users = await readData('users.json');
   const user = users.find(u => u.id === userId);
   if (!user) return null;
@@ -10,3 +10,7 @@ export async function recharge(userId, amount) {
 
   return user.credit;
 }
+
+module.exports = {
+  recharge
+};
