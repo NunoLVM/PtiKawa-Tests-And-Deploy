@@ -40,8 +40,8 @@ Pour certaines dépendances que vous ne souhaitez pas remplacer, utilisez `jest.
 
 ```js
 // tests/unit/services/creditService.test.js
-import * as fileDB from '../../../src/utils/fileDB';
-import { recharge } from '../../../src/services/creditService';
+const fileDB=require('../../../src/utils/fileDB');
+const { recharge }=require('../../../src/services/creditService');
 
 jest.mock('../../../src/utils/fileDB');
 
