@@ -1,4 +1,4 @@
-# ☕ PtitKawa — Partie 3 : Tests Unitaires
+# ☕ PtitKawa — Partie 3 : Tests Ynitaires avec Mocks and Spies
 
 ## 📝 Consignes
 
