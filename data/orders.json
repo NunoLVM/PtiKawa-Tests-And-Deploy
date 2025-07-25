@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "userId": 1,
+    "type": "espresso",
+    "size": "small",
+    "sugar": true,
+    "createdAt": 1721890200000
+  },
+  {
+    "id": 2,
+    "userId": 2,
+    "type": "latte",
+    "size": "medium",
+    "sugar": false,
+    "createdAt": 1721893800000
+  },
+  {
+    "id": 3,
+    "userId": 1,
+    "type": "cappuccino",
+    "size": "large",
+    "sugar": true,
+    "createdAt": 1721897400000
+  },
+  {
+    "id": 4,
+    "userId": 3,
+    "type": "espresso",
+    "size": "small",
+    "sugar": false,
+    "createdAt": 1721901000000
+  },
+  {
+    "id": 5,
+    "userId": 4,
+    "type": "latte",
+    "size": "medium",
+    "sugar": true,
+    "createdAt": 1721904600000
+  },
+  {
+    "id": 6,
+    "userId": 5,
+    "type": "ristretto",
+    "size": "small",
+    "sugar": false,
+    "createdAt": 1721908200000
+  },
+  {
+    "id": 7,
+    "userId": 6,
+    "type": "cappuccino",
+    "size": "large",
+    "sugar": true,
+    "createdAt": 1721911800000
+  }
+]

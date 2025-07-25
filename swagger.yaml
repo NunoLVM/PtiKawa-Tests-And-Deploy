@@ -1,0 +1,247 @@
+openapi: 3.0.0
+info:
+  title: PtitKawa API
+  version: 1.0.0
+  description: >
+    API interne de gestion des commandes de café. Authentification par token JWT.
+
+servers:
+  - url: http://localhost:3000
+    description: Local dev
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
+        credit:
+          type: number
+      example:
+        id: 1
+        username: alice
+        credit: 10
+
+    LoginRequest:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      required: [username, password]
+
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+    
+    RegisterRequest:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      required: [username, password]
+
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+          enum: [espresso, latte, cappuccino, ristretto]
+        size:
+          type: string
+          enum: [small, medium, large]
+        sugar:
+          type: boolean
+        createdAt:
+          type: integer
+          format: int64
+      example:
+        id: 1
+        type: espresso
+        size: small
+        sugar: true
+        createdAt: 1721890200000
+    
+    RechargeRequest:
+      type: object
+      properties:
+        amount:
+          type: number
+          minimum: 1
+          example: 5
+      required: [amount]
+
+    CreditResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Crédit mis à jour
+        newBalance:
+          type: number
+          example: 12.5
+
+tags:
+  - name: Auth
+    description: Authentification et gestion du token
+  - name: Users
+    description: Informations liées aux utilisateurs
+  - name: Orders
+    description: Commandes de café
+  - name: Credit
+    description: Gestion du crédit utilisateur
+
+
+paths:
+  /login:
+    post:
+      tags:
+        - Auth
+      summary: Authentifie un utilisateur
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Token JWT renvoyé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          description: Identifiants invalides
+
+  /register:
+    post:
+      tags:
+        - Auth
+      summary: Crée un nouveau compte utilisateur
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        '201':
+          description: Utilisateur créé avec succès
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Utilisateur créé
+        '409':
+          description: Nom d'utilisateur déjà existant
+        '400':
+          description: Données invalides
+
+  /users/me:
+    get:
+      tags:
+        - Users
+      summary: Récupère le profil de l’utilisateur connecté
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Données du profil
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+  /orders:
+    get:
+      tags:
+        - Orders
+      summary: Liste les commandes de l’utilisateur connecté
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Liste des commandes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+
+    post:
+      tags:
+        - Orders
+      summary: Passe une nouvelle commande de café
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  enum: [espresso, latte, cappuccino, ristretto]
+                size:
+                  type: string
+                  enum: [small, medium, large]
+                sugar:
+                  type: boolean
+              required: [type, size, sugar]
+      responses:
+        '201':
+          description: Commande enregistrée
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: Erreur de validation
+    
+  /credit/recharge:
+    post:
+      tags:
+        - Credit
+      summary: Recharge le crédit de l’utilisateur connecté
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RechargeRequest'
+      responses:
+        '200':
+          description: Crédit rechargé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreditResponse'
+        '400':
+          description: Montant invalide
+        '401':
+          description: Non authentifié
