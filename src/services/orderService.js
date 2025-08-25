@@ -5,13 +5,13 @@
  * @returns {number}
  */
 function calculateOrderPrice(items) {
-  if (!Array.isArray(items)) return 0;
-  return items.reduce((total, item) => {
-    if (typeof item.price === 'number' && item.price >= 0) {
-      return total + item.price;
+    if (!Array.isArray(items)) return 0;
+  for (const item of items) {
+    if (typeof item.price !== 'number' || item.price < 0) {
+      throw new Error("Prix invalide");
     }
-    return total;
-  }, 0);
+  }
+  return items.reduce((total, item) => total + item.price, 0);
 }
 
 /**
@@ -21,7 +21,7 @@ function calculateOrderPrice(items) {
  * @returns {boolean}
  */
 function canAffordOrder(user, total) {
-  if (!user || typeof user.credit !== 'number') return false;
+  if (!user || typeof user.credit !== "number" || typeof total !== "number") return false;
   return user.credit >= total;
 }
 
@@ -31,9 +31,10 @@ function canAffordOrder(user, total) {
  * @returns {number} - Total après remise
  */
 function applyDiscount(total) {
-  if (typeof total !== 'number' || total < 0) return 0;
-  if (total >= 20) return total * 0.9; // -10%
-  return total;
+  if (typeof total !== "number" || total < 0) {
+    throw new Error("Montant invalide");
+  }
+  return total >= 20 ? total * 0.9 : total;
 }
 
 module.exports = {
