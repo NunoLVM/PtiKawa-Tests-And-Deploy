@@ -40,5 +40,11 @@
     "username": "grace",
     "password": "milkandhoney",
     "credit": 25
+  },
+  {
+    "id": 8,
+    "username": "alice2",
+    "password": "admin",
+    "credit": 6.5
   }
 ]

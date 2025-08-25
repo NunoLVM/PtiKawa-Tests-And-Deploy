@@ -106,5 +106,17 @@
     ],
     "total": 2,
     "createdAt": "2025-07-25T16:15:00.000Z"
+  },
+  {
+    "id": 8,
+    "userId": 8,
+    "items": [
+      {
+        "name": "Latte",
+        "price": 3.5
+      }
+    ],
+    "total": 3.5,
+    "createdAt": "2025-08-25T10:12:09.628Z"
   }
 ]
