@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1756132769641" clover="3.2.0">
-  <project timestamp="1756132769641" name="All files">
+<coverage generated="1756196299482" clover="3.2.0">
+  <project timestamp="1756196299482" name="All files">
     <metrics statements="29" coveredstatements="24" conditionals="19" coveredconditionals="19" methods="9" coveredmethods="6" elements="57" coveredelements="49" complexity="0" loc="29" ncloc="29" packages="2" files="3" classes="3"/>
     <package name="services">
       <metrics statements="19" coveredstatements="19" conditionals="19" coveredconditionals="19" methods="6" coveredmethods="6"/>
       <file name="creditService.js" path="C:\Users\Stagiaire\Desktop\Projects\Tests\PtiKawa-Tests-And-Deploy\src\services\creditService.js">
         <metrics statements="8" coveredstatements="8" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
-        <line num="4" count="2" type="stmt"/>
-        <line num="5" count="2" type="stmt"/>
-        <line num="6" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="9" count="1" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
+        <line num="4" count="5" type="stmt"/>
+        <line num="5" count="5" type="stmt"/>
+        <line num="6" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
       </file>
       <file name="orderService.js" path="C:\Users\Stagiaire\Desktop\Projects\Tests\PtiKawa-Tests-And-Deploy\src\services\orderService.js">
